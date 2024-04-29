@@ -20,7 +20,7 @@ from gdb0041.dim_customer
 where customer like "%croma%" and 
 market = "India";
 
- # To find the customer = croma by customer_code from the dataset for FY = 2021*/
+ # To find the customer = croma by customer_code from the dataset for FY = 2021
 Select * 
 from gdb0041.fact_sales_monthly
 Where customer_code = 90002002 and 
@@ -288,6 +288,7 @@ from cte1;
 
 # we have many calculations coming up so to simplify things 
 # we are converting this cte as view
+	
 select *,
 (gross_price_total - gross_price_total*pre_invoice_discount_pct) as net_invoice_sales
 from sales_preinv_discount; #view
@@ -312,6 +313,7 @@ from sales_postinv_discount;
 #created views for sales_preinv_discounts, sales_postinv_discounts, gross_sales and net sales
 
 # Find out Top 5 Markets, Customers, and Products by Net Sales in Millions
+	
 Select 
       Market,
       Round(Sum(Net_sales) / 1000000,2) as Net_sales_mln
@@ -381,6 +383,7 @@ from cte1
 order by region, Net_sales_Millions desc;
 
 # Top 3 products in each division - using dense_rank
+	
 with cte1 as (select
 	p.division,
     p.product,
@@ -401,6 +404,7 @@ from cte2
 where drank<4;
 
 # Top 2 markets in each region on gross_sales 
+	
 with cte1 as(select
 		c.market, c.region,
 		round(sum(gross_price_total)/1000000,2) as gross_sales_millions
