@@ -11,7 +11,7 @@ Sold Quantity,
 Gross Price Per Item, 
 Gross Price Total
 
-Step-1 In this session, we extract the year from the date and add 4 month with the help of date_add function and create a new function 
+Step-1 In this step, we extract the year from the date and add 4 month with the help of date_add function and create a new function 
 called get_fiscal_year for the future reference and for using the date as per fiscal year context.*/
 
 # To find the customer 'Croma' from the dataset
