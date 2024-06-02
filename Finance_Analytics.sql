@@ -1,7 +1,7 @@
 
 #Task-1 
-/*For making the financial report of FY2023 of Croma India and company Wants to generate a report of individual 
-product sales (aggregated every month at the product code level). So the company can track individual product sales
+/*For making the financial report of FY2023 of Croma India and Atliq Hardware Wants to generate a report of individual 
+product sales (aggregated every month at the product code level). So Atliq Hardware can track individual product sales
 and run further product analysis on it in Excel.
 Which includes:- 
 Month, 
