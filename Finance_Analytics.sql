@@ -1,8 +1,8 @@
 
 #Task-1 
-/*For making the financial report of FY2023 of Croma India and Croma Wants to generate a report of individual 
-product sales (aggregated on a monthly basis at the product code level). So the company can track individual product sales
-and run further product analysis on it in excel.
+/*For making the financial report of FY2023 of Croma India and company Wants to generate a report of individual 
+product sales (aggregated every month at the product code level). So the company can track individual product sales
+and run further product analysis on it in Excel.
 Which includes:- 
 Month, 
 Product Name, 
@@ -11,8 +11,8 @@ Sold Quantity,
 Gross Price Per Item, 
 Gross Price Total
 
-Step-1 In this step, we extract the year from the date and add 4 month with the help of date_add function and create a new function 
-called get_fiscal_year for the future reference and for using the date as per fiscal year context.*/
+Step-1 In this step, we extract the year from the date and add 4 months with the help of the date_add function and create a new function 
+called get_fiscal_year for future reference and for using the date as per fiscal year context.*/
 
 # To find the customer 'Croma' from the dataset
 Select * 
@@ -102,11 +102,11 @@ on
 Where customer_code = 90002002 and
       get_fiscal_year(date)=2021 and
       get_fiscal_quarter(date) = "Q1"
-order by date asc
+order by date Asc
 limit 1000000;
 
 # Task-2 
-/*As a product owner, I need an aggregate monthly gross sales report for Croma India Customer so that I can track how 
+/*As a product owner, I need an aggregate monthly gross sales report of Croma India Customers so that the product owner can track how 
 much sales this particular customer is generating for AtliQ and manage our relationships accordingly.
 The report should have the following fields,
 1. Month,
@@ -124,7 +124,7 @@ where customer_code = 90002002
 group by s.date
 order by s.date asc;
 
-/* Generate a yeraly report for Croma India where there are two columns
+/* Generate a yearly report for Croma India where there are two columns
 1. Fiscal Year
 2. Total Gross Sales Amount in that year from Croma*/
 
@@ -141,7 +141,7 @@ where
 group by get_fiscal_year(date)
 order by fiscal_year;
 
-# Created Stored Procedure for finding monthly gross sales report for any customer
+# Created Stored Procedure for finding monthly gross sales reports for any customer
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_monthly_gross_sales_for_customer`(
            in_customer_codes TEXT 
 )
@@ -160,7 +160,7 @@ group by s.date
 order by s.date asc;
 END;
 
-# Created Stored Procedure to find the market badge if product sales above 5Million will be considered as GOLD
+# Created Stored Procedure to find the market badge if product sales above 5 million will be considered as GOLD
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_market_badge`(
 	 IN in_market varchar(45),
 	 IN in_fiscal_year year,
@@ -194,12 +194,12 @@ BEGIN
 END;
 
 # Task - 3 
-/*As a product owner, I want a report for top markets, products, customers by net sales for a given financial year so that I 
+/*As a product owner, I want a report for top markets, products, and customers by net sales for a given financial year so that I 
 can have a holistic view of our financial performance and can take appropriate actions to address any potential issues.
-We will probably write stored procedure for this as will need this report going forward as well.*/
+We will probably write a stored procedure for this as will need this report going forward as well.*/
 
 # After EXPLAIN ANALYZE of the query found get_fiscal_year() takes lots of time.
-# One solution is to make a dim_date table so fiscal year can be easily mapped and for getting the pre-invoice discount percentage in the table
+# One solution is to make a dim_date table so the fiscal year can be easily mapped and for getting the pre-invoice discount percentage in the table
 Select 
       s.date, s.product_code, 
       p.product, p.variant, s.sold_quantity, 
@@ -225,13 +225,13 @@ Where
      d.fiscal_year = 2021 
 limit 100000;
 
-/* After adding the created table the query where it took 14 seconds to fetching the data but by making one table called dim_date and join 
-with another tables the query took only 1.5 seconds for fetching the data.
-For creating a new table we have to select the create table option from the table menu then enter the required columns
-and we can import the excel or csv file from the computer also.*/
+/* After adding the created table the query where took 14 seconds to fetch the data but by making one table called dim_date and join 
+with another table, the query took only 1.5 seconds to fetch the data.
+To create a new table we have to select the create table option from the table menu then enter the required columns
+and we can import the Excel or CSV file from the computer also.*/
 
 # Query Performance solution-2  
-# We can add fiscal_year column into the fact_sales_monthly so we dont have to join another table with the query
+# We can add the fiscal_year column into the fact_sales_monthly so we don't have to join another table with the query
 
 Select 
       s.date, 
@@ -286,8 +286,8 @@ select *,
 (1 - pre_invoice_discount_pct) * gross_price_total as net_invoice_sales
 from cte1;
 
-# we have many calculations coming up so to simplify things 
-# we are converting this cte as view
+# We have many calculations coming up so to simplify things 
+# We are converting this cte as a view
 	
 select *,
 (gross_price_total - gross_price_total*pre_invoice_discount_pct) as net_invoice_sales
