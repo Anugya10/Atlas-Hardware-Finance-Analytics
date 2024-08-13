@@ -226,7 +226,7 @@ Where
 limit 100000;
 
 /* After adding the created table the query where took 14 seconds to fetch the data but by making one table called dim_date and join 
-with another table, the query took only 1.5 seconds to fetch the data.
+with another table, the query took only 5.6 seconds to fetch the data.
 To create a new table we have to select the create table option from the table menu then enter the required columns
 and we can import the Excel or CSV file from the computer also.*/
 
