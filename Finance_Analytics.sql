@@ -1,7 +1,7 @@
 
 #Task-1 
-/*For making the financial report of FY2023 of Croma India and Atliq Hardware Wants to generate a report of individual 
-product sales (aggregated every month at the product code level). So Atliq Hardware can track individual product sales
+/*For making the financial report of FY2023 Croma India and Atlas Hardware Wants to generate a report of individual 
+product sales (aggregated every month at the product code level). So Atlas Hardware can track individual product sales
 and run further product analysis on it in Excel.
 Which includes:- 
 Month, 
@@ -107,7 +107,7 @@ limit 1000000;
 
 # Task-2 
 /*As a product owner, I need an aggregate monthly gross sales report of Croma India Customers so that the product owner can track how 
-much sales this particular customer is generating for AtliQ and manage our relationships accordingly.
+much sales this particular customer is generating for Atlas and manage our relationships accordingly.
 The report should have the following fields,
 1. Month,
 2. Total Gross sales amount to Croma India in this month */
@@ -231,7 +231,7 @@ To create a new table we have to select the create table option from the table m
 and we can import the Excel or CSV file from the computer also.*/
 
 # Query Performance solution-2  
-# We can add the fiscal_year column into the fact_sales_monthly so we don't have to join another table with the query
+# We can add the fiscal_year column into the fact_sales_monthly so we dont have to join another table with the query
 
 Select 
       s.date, 
