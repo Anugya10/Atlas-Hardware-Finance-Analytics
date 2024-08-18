@@ -315,7 +315,7 @@ on
     pre.fiscal_year = s.fiscal_yrs
 	
 # For calculating the Post_invoice_discount_pct and Net sales with the view called sales_preinv_discount
-
+CREATE VIEW 'sales_postinv_discount' as
 select *,
        sales_preinv_discount
        (1 - pre_invoice_discount_pct)* gross_price_total as Net_invoice_Sales, 
@@ -326,12 +326,13 @@ on
         s.date = po.date and
         s.product_code = po.product_code and
         s.customer_code = po.customer_code;
-        
+
+CREATE VIEW 'net_sales' as
 Select *,
        (1 - post_invoice_discount_pct) * net_invoice_sales as net_sales
 from sales_postinv_discount;
 
-#created views for sales_preinv_discounts, sales_postinv_discounts, gross_sales and net sales
+#created views for sales_preinv_discounts, sales_postinv_discounts, and net sales
 
 # Find out Top 5 Markets, Customers, and Products by Net Sales in Millions
 	
