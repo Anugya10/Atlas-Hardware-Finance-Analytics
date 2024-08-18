@@ -287,12 +287,33 @@ select *,
 from cte1;
 
 # We have many calculations coming up so to simplify things 
-# We are converting this cte as a view
-	
-select *,
-(gross_price_total - gross_price_total*pre_invoice_discount_pct) as net_invoice_sales
-from sales_preinv_discount; #view
+# We are converting this CTE as a view
 
+CREATE VIEW 'sales_preinv_discount' as
+SELECT  
+	s.date, s.customer_code, s.product_code, 
+    c.market,
+    p.product, p.variant, s.sold_quantity,
+    g.gross_price,
+    round(g.gross_price*s.sold_quantity,2) as gross_price_total,
+    pre.pre_invoice_discount_pct
+from
+fact_sales_monthly s
+join dim_customer c
+on
+	s.customer_code = c.customer_code
+join dim_product p 
+on 	
+	s.product_code = p.product_code
+join fact_gross_price g
+on 
+	g.product_code = s.product_code and
+	g.fiscal_year = s.fiscal_yrs
+join fact_pre_invoice_deductions pre
+on 
+	s.customer_code = pre.customer_code and
+    pre.fiscal_year = s.fiscal_yrs
+	
 # For calculating the Post_invoice_discount_pct and Net sales with the view called sales_preinv_discount
 
 select *,
